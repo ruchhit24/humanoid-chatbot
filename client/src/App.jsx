@@ -1,18 +1,30 @@
 import photo from "../assets/vecteezy_chatgpt-logo-transparent-background_22841114.png";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Box from '@mui/material/Box'; 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useState } from "react";
 import { TextField } from "@mui/material";
+import axios from "axios"; 
 
 const App = () => {
   const[open,setOpen]= useState(false);
+  const[prompt,setPrompt] = useState("");
+  const[res,setRes]= useState("");
+  const[loading,setLoading]=useState(false);
+
   const handleOpen = ()=>{
     setOpen(true);
   }
   const handleClose = ()=>{
     setOpen(false);
+  }
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    setLoading(true);
+    const res = await axios.post("http://localhost:8080/chat",{prompt});
+    setRes(res);
+    setLoading(false)
+    console.log(res)
   }
   return (
     <div className="w-full h-screen bg-[#1e1e25]">
@@ -38,8 +50,8 @@ const App = () => {
             <Typography variant="h6" component="h2" sx={{fontWeight : "bold"}}>
               What Do You Want to Ask
             </Typography>
-             <form className="flex flex-col">
-             <TextField id="outlined-basic" label="Prompt" variant="outlined" />
+             <form className="flex flex-col" onSubmit={(e)=>handleSubmit(e)}>
+             <TextField value={prompt} onChange={(e)=>setPrompt(e.target.value)} id="outlined-basic" label="Prompt" variant="outlined" />
              <button className="text-white font-semibold cursor-pointer border-[1px] tracking-tight bg-gradient-to-l from-green-700 to-green-900 px-8 py-2 mx-auto rounded-lg text-md mt-4 capitalize">Submit</button>
              </form>
           </Box>
