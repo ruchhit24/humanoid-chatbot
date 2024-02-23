@@ -4,7 +4,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useState } from "react";
 import { TextField } from "@mui/material";
-import axios from "axios"; 
+import axios from "axios";
+import ChatResponse from "./components/ChatResponse"
+
 
 const App = () => {
   const[open,setOpen]= useState(false);
@@ -46,7 +48,7 @@ const App = () => {
           aria-describedby="modal-modal-description"
           className=" flex flex-col justify-center items-center"
         >
-          <Box className="bg-white w-[50vw] h-[25vh] rounded-lg p-4 bg-opacity-90">
+          <Box className="bg-white w-[50vw] rounded-lg p-4 bg-opacity-90">
             <Typography variant="h6" component="h2" sx={{fontWeight : "bold"}}>
               What Do You Want to Ask
             </Typography>
@@ -54,6 +56,7 @@ const App = () => {
              <TextField value={prompt} onChange={(e)=>setPrompt(e.target.value)} id="outlined-basic" label="Prompt" variant="outlined" />
              <button className="text-white font-semibold cursor-pointer border-[1px] tracking-tight bg-gradient-to-l from-green-700 to-green-900 px-8 py-2 mx-auto rounded-lg text-md mt-4 capitalize">Submit</button>
              </form>
+            {res && <ChatResponse response={res}/>}
           </Box>
         </Modal>
       </div>
