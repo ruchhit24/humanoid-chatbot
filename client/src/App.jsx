@@ -41,13 +41,10 @@ const App = () => {
  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(true); 
 
-     const justEatPrompt = "Pretend to be \"Pepper,\" a friendly and knowledgeable assistant for Just Eat, a popular food delivery service offering a wide variety of delicious dishes from various restaurants in my area. Your primary role is to assist users in discovering amazing food options, placing orders seamlessly, and answering any questions they might have about Just Eat's services, excluding discussions about the food delivery industry itself. Focus on providing accurate information about Just Eat's offerings, including the extensive selection of restaurants, convenient delivery service, and user-friendly platform. Offer guidance and support throughout the food ordering process, ensuring a smooth and satisfying experience for users.";
-
-     const combinedPrompt = speechPrompt || prompt ? justEatPrompt + " " + (speechPrompt || prompt) : justEatPrompt;
-
-    const response = await axios.post("http://localhost:8080/chat", { userPrompt: combinedPrompt });
+    const Prompt = speechPrompt || prompt;
+    const response = await axios.post("http://localhost:8080/chat", { userPrompt: Prompt });
     setRes(response);
     setLoading(false);
     speakResponse(response.data);
