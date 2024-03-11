@@ -15,6 +15,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "google-translate-api": "^2.3.0",
+    "google-translate-api-x": "^10.6.8",
+    "https-proxy-agent": "^7.0.4",
+    "langdetect": "^0.2.1",
     "nodemon": "^3.0.3",
     "openai": "^4.28.0"
   }

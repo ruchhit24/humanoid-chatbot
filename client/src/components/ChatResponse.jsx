@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-const ChatResponse = ({response}) => {
-   const res = response.data;
+const ChatResponse = ({ response }) => {
+  // Assuming the response is an Axios response object containing text data
+  const responseData = response && response.data;
+
   return (
     <div className='mt-6'>
-       <p className='text-md font-semibold whitespace-pre-wrap overflow-y-scroll'>{res}</p>
+      {/* Render the response data */}
+      <p className='text-md font-semibold whitespace-pre-wrap overflow-y-scroll'>
+        {responseData}
+      </p>
     </div>
-  )
-}
+  );
+};
 
-export default ChatResponse
+export default ChatResponse;

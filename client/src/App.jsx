@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import photo from "../assets/vecteezy_chatgpt-logo-transparent-background_22841114.png";
+import photo from "../assets/logo.png"
 import Box from '@mui/material/Box'; 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { LinearProgress, TextField } from "@mui/material";
 import axios from "axios"; 
 import ChatResponse from "./components/ChatResponse"; 
+import { speak } from 'google-translate-api-x';
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -50,6 +51,19 @@ const App = () => {
     speakResponse(response.data);
   };
 
+  // const speakResponse = async (text) => {
+  //   try {
+  //     const chunkSize = 200;
+  //     const chunks = text.match(new RegExp(`.{1,${chunkSize}}`, 'g'));
+  //     for (const chunk of chunks) {
+  //       await speak(chunk, { lang: 'hi-IN' }); // Assuming 'hi-IN' is the code for Hindi language
+  //     }
+  //   } catch (error) {
+  //     console.error('Error occurred while speaking:', error);
+  //   }
+  //   setSpeechPrompt('');
+  // };
+  
   const speakResponse = (text) => {
     const synthesisUtterance = new SpeechSynthesisUtterance(text);
    window.speechSynthesis.speak(synthesisUtterance);
@@ -58,12 +72,13 @@ const App = () => {
 
   return (
     <div className="w-full h-screen bg-[#1e1e25]">
-      <div className="flex flex-col justify-center items-center pt-16">
+      <div className="flex flex-col justify-center items-center pt-40">
         <img
           src={photo}
           alt="hdh"
-          width={350}
-          height={350} 
+          width={550}
+          height={550} 
+          className='rounded-3xl'
         />
 
         <button onClick={() => setOpen(true)} className="text-white font-semibold cursor-pointer hover:scale-110 border-[1px] tracking-tight duration-700 bg-gradient-to-l from-green-700 to-green-900 px-4 py-2 rounded-lg text-lg mt-16 capitalize">
